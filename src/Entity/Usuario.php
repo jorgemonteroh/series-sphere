@@ -42,9 +42,13 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $fecha_creacion = null;
 
+    #[ORM\OneToMany(mappedBy: 'usuario', targetEntity: ContadorCapitulos::class)]
+    private Collection $contadorCapitulos;
+
     public function __construct()
     {
         $this->listas = new ArrayCollection();
+        $this->contadorCapitulos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -145,6 +149,36 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFechaCreacion(\DateTimeInterface $fecha_creacion): static
     {
         $this->fecha_creacion = $fecha_creacion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ContadorCapitulos>
+     */
+    public function getContadorCapitulos(): Collection
+    {
+        return $this->contadorCapitulos;
+    }
+
+    public function addContadorCapitulo(ContadorCapitulos $contadorCapitulo): static
+    {
+        if (!$this->contadorCapitulos->contains($contadorCapitulo)) {
+            $this->contadorCapitulos->add($contadorCapitulo);
+            $contadorCapitulo->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContadorCapitulo(ContadorCapitulos $contadorCapitulo): static
+    {
+        if ($this->contadorCapitulos->removeElement($contadorCapitulo)) {
+            // set the owning side to null (unless already changed)
+            if ($contadorCapitulo->getUsuario() === $this) {
+                $contadorCapitulo->setUsuario(null);
+            }
+        }
 
         return $this;
     }

@@ -29,8 +29,12 @@ class Temporada
     #[ORM\Column(nullable: true)]
     private ?int $capitulos = null;
 
+    #[ORM\OneToMany(mappedBy: 'temporada', targetEntity: ContadorCapitulos::class)]
+    private Collection $contadorCapitulos;
+
     public function __construct()
     {
+        $this->contadorCapitulos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -92,6 +96,36 @@ class Temporada
     public function setCapitulos(?int $capitulos): static
     {
         $this->capitulos = $capitulos;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ContadorCapitulos>
+     */
+    public function getContadorCapitulos(): Collection
+    {
+        return $this->contadorCapitulos;
+    }
+
+    public function addContadorCapitulo(ContadorCapitulos $contadorCapitulo): static
+    {
+        if (!$this->contadorCapitulos->contains($contadorCapitulo)) {
+            $this->contadorCapitulos->add($contadorCapitulo);
+            $contadorCapitulo->setTemporada($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContadorCapitulo(ContadorCapitulos $contadorCapitulo): static
+    {
+        if ($this->contadorCapitulos->removeElement($contadorCapitulo)) {
+            // set the owning side to null (unless already changed)
+            if ($contadorCapitulo->getTemporada() === $this) {
+                $contadorCapitulo->setTemporada(null);
+            }
+        }
 
         return $this;
     }

@@ -46,6 +46,9 @@ class Serie
     #[ORM\OneToMany(mappedBy: 'serie', targetEntity: SerieLista::class)]
     private Collection $serieLista;
 
+    #[ORM\OneToMany(mappedBy: 'serie', targetEntity: ContadorCapitulos::class)]
+    private Collection $contadorCapitulos;
+
     public function __construct()
     {
         $this->temporada = new ArrayCollection();
@@ -53,6 +56,7 @@ class Serie
         $this->streamings = new ArrayCollection();
         $this->director = new ArrayCollection();
         $this->serieLista = new ArrayCollection();
+        $this->contadorCapitulos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -260,6 +264,36 @@ class Serie
             // set the owning side to null (unless already changed)
             if ($serieListum->getSerie() === $this) {
                 $serieListum->setSerie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ContadorCapitulos>
+     */
+    public function getContadorCapitulos(): Collection
+    {
+        return $this->contadorCapitulos;
+    }
+
+    public function addContadorCapitulo(ContadorCapitulos $contadorCapitulo): static
+    {
+        if (!$this->contadorCapitulos->contains($contadorCapitulo)) {
+            $this->contadorCapitulos->add($contadorCapitulo);
+            $contadorCapitulo->setSerie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContadorCapitulo(ContadorCapitulos $contadorCapitulo): static
+    {
+        if ($this->contadorCapitulos->removeElement($contadorCapitulo)) {
+            // set the owning side to null (unless already changed)
+            if ($contadorCapitulo->getSerie() === $this) {
+                $contadorCapitulo->setSerie(null);
             }
         }
 
