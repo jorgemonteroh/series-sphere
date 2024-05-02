@@ -16,6 +16,7 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> <!-- select2 librería -->
 <link rel="stylesheet" type="text/css" href="{{ asset('styles/styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('styles/buscar.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/home.css') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Madimi+One&display=swap" rel="stylesheet">
@@ -96,42 +97,29 @@
     <section class="contenedor-pagina">
       <p class="titulo-pagina"><i>Página de búsqueda</i></p>
       <div class="contenedor-formulario">
-        <form action="#" method="post" class="formulario-busqueda">
+        <form action="{{ path('busqueda_submit') }}" method="post" class="formulario-busqueda">
           <div>        
             <select name="genero" class="select-genero">
               <option></option>
-              <!-- TODO: Recoger valores por BBDD -->
-              <option value="accion">Acción</option>
-              <option value="aventura">Aventura</option>
-              <option value="drama">Drama</option>
-              <option value="aventura">Aventura</option>
-              <option value="drama">Drama</option>
-              <option value="aventura">Aventura</option>
-              <option value="drama">Drama</option>
-              <option value="aventura">Aventura</option>
-              <option value="drama">Drama</option>
-              <option value="aventura">Aventura</option>
-              <option value="drama">Drama</option>
-              <option value="aventura">Aventura</option>
-              <option value="drama">Drama</option>
-              <option value="aventura">Aventura</option>
-              <option value="drama">Drama</option>
+              {% for genero in array_generos %}
+                <option value="{{genero.nombre}}">{{genero.nombre}}</option>
+              {% endfor %}
             </select>
           </div>  
           <div>
-            <select name="plataforma" class="select-plataforma">
+            <select name="streaming" class="select-streaming">
               <option></option>
-              <option value="netflix">Netflix</option>
-              <option value="hbo">HBO</option>
-              <option value="amazon">Amazon Prime Video</option>
+              {% for streaming in array_streamings %}
+                <option value="{{streaming.nombre}}">{{streaming.nombre}}</option>
+              {% endfor %}
             </select>
           </div>
           <div>
             <select name="lanzamiento" class="select-lanzamiento">
               <option></option>
-              <option value="2000s">2000s</option>
-              <option value="2010s">2010s</option>
-              <option value="2020s">2020s</option>
+              {% for lanzamiento in array_lanzamientos %}
+                <option value="{{lanzamiento}}">{{lanzamiento}}</option>
+              {% endfor %}
             </select>
           </div>
           <div>
@@ -142,9 +130,19 @@
           </div>
         </form>
         <p class="separar-busqueda"></p>
-          <div class="flex-container destacados series-container" style="min-height:50vh">
-            <!-- TODO: Mostrar Series al busvar -->
-          </div> <!-- series-container -->
+        <p class="titulo-pagina"><i>Búsqueda: {{ busqueda_filtros }}</i></p>
+        <div class="flex-container viendo-container" style="{{ container_empty }}">
+          {% for serie in array_series %}
+            <div>
+              <a href="{{ path('mostrar_serie_id', {'id': serie.id}) }}">
+                <img
+                    src="{{ asset(serie.posterSrc) }}"
+                    class="card-img-top"
+                    alt="..."
+                />
+              </a>
+            </div>
+          {% endfor %}
         </div> <!-- resultado-busqueda -->
       </div> <!-- contenedor-formulario -->
     </section>

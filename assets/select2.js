@@ -3,7 +3,7 @@ $(document).ready(function() {
         placeholder: 'Género',
         allowClear: true,
     });
-    $('.select-plataforma').select2({
+    $('.select-streaming').select2({
         placeholder: 'Plataforma',
         allowClear: true,
     });
