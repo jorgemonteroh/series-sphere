@@ -11,4 +11,7 @@ $(document).ready(function() {
         placeholder: 'Fecha de Lanzamiento',
         allowClear: true
     });
+    $('select').change(function() {
+        $('form').submit();
+    });
 });

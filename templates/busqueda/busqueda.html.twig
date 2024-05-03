@@ -99,7 +99,7 @@
       <div class="contenedor-formulario">
         <form action="{{ path('busqueda_submit') }}" method="post" class="formulario-busqueda">
           <div>        
-            <select name="genero" class="select-genero">
+            <select name="genero" class="select-genero select-filtro">
               <option></option>
               {% for genero in array_generos %}
                 <option value="{{genero.nombre}}">{{genero.nombre}}</option>
@@ -107,7 +107,7 @@
             </select>
           </div>  
           <div>
-            <select name="streaming" class="select-streaming">
+            <select name="streaming" class="select-streaming select-filtro">
               <option></option>
               {% for streaming in array_streamings %}
                 <option value="{{streaming.nombre}}">{{streaming.nombre}}</option>
@@ -115,7 +115,7 @@
             </select>
           </div>
           <div>
-            <select name="lanzamiento" class="select-lanzamiento">
+            <select name="lanzamiento" class="select-lanzamiento select-filtro">
               <option></option>
               {% for lanzamiento in array_lanzamientos %}
                 <option value="{{lanzamiento}}">{{lanzamiento}}</option>
@@ -241,4 +241,10 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> <!-- select2 librería -->
 <script src="{{ asset('select2.js') }}"></script>
 <script src="{{ asset('app.js') }}"></script>
+<script>
+  $(document).ready(function() {
+    // TODO: cambiar render solo para el select seleccionado
+    $('.select2-selection__rendered').text("{{ busqueda_filtros }}");
+  });
+</script>
 {% endblock %}

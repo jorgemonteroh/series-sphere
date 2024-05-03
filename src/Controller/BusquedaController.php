@@ -46,7 +46,7 @@ class BusquedaController extends AbstractController
             $filtro = $_POST['streaming'];
             $streaming = $streamingRepository->buscarStreaming($_POST['streaming']);
             $array_series = $streaming->getSerie();
-        }    
+        }        
 
         return $this->render('busqueda/busqueda.html.twig', [
             'array_generos' => $array_generos,
