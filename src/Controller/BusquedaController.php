@@ -80,7 +80,12 @@ class BusquedaController extends AbstractController
         if (isset($_POST["input"])) {
             $input = $_POST["input"];
 
-            $array_series = $serieRepository->buscarSeries($input);
+            if ($input == "selectAll") {
+                $array_series = $serieRepository->findAll();
+                $input = 'Todas las series';
+            } else {
+                $array_series = $serieRepository->buscarSeries($input);
+            }
 
             return $this->render('busqueda/busqueda.html.twig', [
                 'array_generos' => $array_generos,

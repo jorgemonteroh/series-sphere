@@ -246,6 +246,8 @@
 
   $(document).ready(function() {
 
+    
+
     $('#input_btn').on('click', function() {
 
       var input = $('#input_nombre').val();
@@ -262,7 +264,15 @@
           }
         });
       } else {
-        console.log("EMPTY");
+        $.ajax({
+          url: "livesearch",
+          method: "POST",
+          data: {input:"selectAll"},
+
+          success:function(data){
+            $("body").html(data);
+          }
+        });
       }
       
 
