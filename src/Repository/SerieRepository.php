@@ -35,6 +35,28 @@ class SerieRepository extends ServiceEntityRepository
 
     }
 
+    public function buscarLanzamiento($decada): ?array {
+        $anio = date('Y');
+        $decada = intval($decada);
+
+        if ($decada !== $anio) {
+            $decada = rtrim($decada);
+        }
+        
+        $decada_max = $decada + 9;
+
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "
+            SELECT * FROM serie
+            WHERE fecha_lanzamiento BETWEEN '$decada' AND '$decada_max'
+            ";
+
+        $resultSet = $conn->executeQuery($sql);
+
+        return $resultSet->fetchAllAssociative();
+    }
+
+
     public function countGeneros(): ?array {
         $conn = $this->getEntityManager()->getConnection();
         $sql = "

@@ -48,7 +48,12 @@ class BusquedaController extends AbstractController
             $filtro = $_POST['streaming'];
             $streaming = $streamingRepository->buscarStreaming($_POST['streaming']);
             $array_series = $streaming->getSerie();
-        }        
+        }
+        
+        if (isset($_POST['lanzamiento']) && $_POST['lanzamiento'] !== "") {
+            $filtro = $_POST['lanzamiento'];
+            $array_series = $serieRepository->buscarLanzamiento($_POST['lanzamiento']);
+        } 
 
         if (isset($_POST["input"])) {
             $filtro = $_POST["input"];
