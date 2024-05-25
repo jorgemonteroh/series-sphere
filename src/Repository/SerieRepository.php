@@ -22,6 +22,19 @@ class SerieRepository extends ServiceEntityRepository
         parent::__construct($registry, Serie::class);
     }
 
+    public function buscarSeries($nombre): ?array {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "
+            SELECT * FROM serie 
+            WHERE nombre LIKE '%{$nombre}%'
+            ";
+
+        $resultSet = $conn->executeQuery($sql);
+
+        return $resultSet->fetchAllAssociative();
+
+    }
+
     public function countGeneros(): ?array {
         $conn = $this->getEntityManager()->getConnection();
         $sql = "

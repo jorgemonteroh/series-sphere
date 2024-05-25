@@ -77,7 +77,7 @@ class SerieController extends AbstractController
         return $this->render('serie/views/showSerie.html.twig', [
             'id_serie' => $serie->getId(),
             'nombre_serie' => $serie->getNombre(),
-            'poster_serie' => $serie->getPosterSrc(),
+            'poster_serie' => $serie->getposter_src(),
             'streaming_serie' => $serie->getStreamings(),
             'genero_serie' => $serie->getGenero(),
             'director_serie' => $serie->getDirector(),

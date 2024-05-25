@@ -130,12 +130,12 @@ class Serie
         return $this;
     }
 
-    public function getPosterSrc(): ?string
+    public function getposter_src(): ?string
     {
         return $this->poster_src;
     }
 
-    public function setPosterSrc(?string $poster_src): static
+    public function setposter_src(?string $poster_src): static
     {
         $this->poster_src = $poster_src;
 

@@ -123,20 +123,21 @@
             </select>
           </div>
           <div>
-            <input type="text" name="nombre" placeholder="Nombre . . .">
+            <input type="text" id="input_nombre" name="nombre" placeholder="Nombre . . .">
           </div>
           <div>
-            <input type="submit" name="formBusqueda" value="Buscar" class="btn-busqueda">
+            <div class="btn-busqueda" id="input_btn">Buscar</div>
           </div>
+
         </form>
         <p class="separar-busqueda"></p>
-        <p class="titulo-pagina"><i>Búsqueda: {{ busqueda_filtros }}</i></p>
+        <p class="titulo-pagina" id="titulo-pagina"><i>Búsqueda: {{ busqueda_filtros }}</i></p>
         <div class="flex-container viendo-container" style="{{ container_empty }}">
           {% for serie in array_series %}
             <div>
               <a href="{{ path('mostrar_serie_id', {'id': serie.id}) }}">
                 <img
-                    src="{{ asset(serie.posterSrc) }}"
+                    src="{{ asset(serie.poster_src) }}"
                     class="card-img-top"
                     alt="..."
                 />
@@ -242,9 +243,32 @@
 <script src="{{ asset('select2.js') }}"></script>
 <script src="{{ asset('app.js') }}"></script>
 <script>
+
   $(document).ready(function() {
-    // TODO: cambiar render solo para el select seleccionado
-    $('.select2-selection__rendered').text("{{ busqueda_filtros }}");
+
+    $('#input_btn').on('click', function() {
+
+      var input = $('#input_nombre').val();
+      //alert(input);
+
+      if (input != "") {
+        $.ajax({
+          url: "livesearch",
+          method: "POST",
+          data: {input:input},
+
+          success:function(data){
+            $("body").html(data);
+          }
+        });
+      } else {
+        console.log("EMPTY");
+      }
+      
+
+    });
+
   });
+
 </script>
 {% endblock %}

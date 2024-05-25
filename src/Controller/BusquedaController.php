@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Repository\GeneroRepository;
+use App\Repository\SerieRepository;
 use App\Repository\StreamingRepository;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,12 +30,13 @@ class BusquedaController extends AbstractController
     }
 
     #[Route('busquedaSubmit', name: 'busqueda_submit')]
-    public function submit(GeneroRepository $generoRepository, StreamingRepository $streamingRepository): Response {     
+    public function submit(GeneroRepository $generoRepository, StreamingRepository $streamingRepository, SerieRepository $serieRepository): Response {     
         $array_generos = $generoRepository->findAll();
         $array_streamings = $streamingRepository->findAll();
         $anio = date('Y');
         $array_lanzamientos = array('1960s', '1970s', '1980s','1990s','2000s','2010s','2020s', $anio);
         $array_series = "";
+        $filtro = "";
    
         if (isset($_POST['genero']) && $_POST['genero'] !== "") {
             $filtro = $_POST['genero'];
@@ -48,6 +50,11 @@ class BusquedaController extends AbstractController
             $array_series = $streaming->getSerie();
         }        
 
+        if (isset($_POST["input"])) {
+            $filtro = $_POST["input"];
+            $array_series = $serieRepository->buscarSeries($filtro);
+        }
+
         return $this->render('busqueda/busqueda.html.twig', [
             'array_generos' => $array_generos,
             'array_streamings' => $array_streamings,
@@ -57,4 +64,28 @@ class BusquedaController extends AbstractController
             'busqueda_filtros' => $filtro
         ]);
     }
+
+    #[Route('livesearch', name: 'livesearch')]
+    public function livesearch(SerieRepository $serieRepository, GeneroRepository $generoRepository, StreamingRepository $streamingRepository) {
+        $array_generos = $generoRepository->findAll();
+        $array_streamings = $streamingRepository->findAll();
+        $anio = date('Y');
+        $array_lanzamientos = array('1960s', '1970s', '1980s','1990s','2000s','2010s','2020s', $anio);
+
+        if (isset($_POST["input"])) {
+            $input = $_POST["input"];
+
+            $array_series = $serieRepository->buscarSeries($input);
+
+            return $this->render('busqueda/busqueda.html.twig', [
+                'array_generos' => $array_generos,
+                'array_streamings' => $array_streamings,
+                'array_lanzamientos' => $array_lanzamientos,
+                'container_empty' => "",    
+                'array_series' => $array_series,
+                'busqueda_filtros' => "'".$input."'"
+            ]);    
+        }
+    }
+
 }
