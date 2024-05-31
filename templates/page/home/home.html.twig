@@ -115,7 +115,8 @@ text-align:center
                   {% if serie.id == temporada.serie_id %}
                       <option disabled>Temporada {{temporada.numero_temp}}</option>
                     {% for i in 0..temporada.capitulos %}
-                      <option value="T{{temporada.id}}C{{i}} {{selected}}">T{{temporada.numero_temp}} | Cap. {{i}}</option>
+                      {% set valor_option = 'T' ~ temporada.id ~ 'C' ~ i %}
+                      <option value="{{valor_option}}" {% if valor_option == seriesSelectedValores[serie.id]|default(null) %}selected{% endif %}>T{{temporada.numero_temp}} | Cap. {{i}}</option>
                     {% endfor %}
                   {% endif %}
                 {% endfor %}

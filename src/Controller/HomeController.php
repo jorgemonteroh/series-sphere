@@ -73,11 +73,11 @@ class HomeController extends AbstractController
             $array_series_por_ver[] = $serieRepository->find($id_serie);
         }
 
-        $valorSelected = "T1C0";
+        $seriesSelectedValores = [];
         if(isset($_POST['current_seguimiento']) && isset($_POST['serie_seguimiento'])) {
             $serie = $serieRepository->find($_POST['serie_seguimiento']);
             $serieActualizar = $contadorCapitulosRepository->buscarSerieSeguimiento($serie->getId());
-            $valorSelected = $_POST['current_seguimiento'];
+            $seriesSelectedValores[$serie->getId()] = $_POST['current_seguimiento'];
             // Si la serie ya existe se actualiza:
             if (count($serieActualizar) == 1) {
                 $contadorCapitulos = $entityManager->getRepository(ContadorCapitulos::class)->find($serieActualizar[0]['id']);
@@ -118,16 +118,24 @@ class HomeController extends AbstractController
                     $entityManager->persist($contadorCapitulos);
                     $entityManager->flush();
                 }
-            }
+            } 
+        }
 
-            
+        foreach ($array_series_viendo as $serie) {
+            $serieId = $serie->getId();
+            $contadorCapitulos = $contadorCapitulosRepository->buscarSerieSeguimiento($serieId);
+            if(!empty($contadorCapitulos)) {
+                $temporadaId = $contadorCapitulos[0]['temporada_id'];
+                $capituloActual = $contadorCapitulos[0]['capitulo_actual'];
+                $seriesSelectedValores[$serieId] = 'T' . $temporadaId . 'C' . $capituloActual;
+            }
         }
 
         return $this->render('page/home/home.html.twig', [
             'array_series_viendo' => $array_series_viendo,
             'array_series_por_ver' => $array_series_por_ver,
             'array_temporadas' => $array_temporadas,
-            'selected' => $valorSelected
+            'seriesSelectedValores' => $seriesSelectedValores
         ]);
     }
 }
