@@ -11,12 +11,17 @@ class SecurityController extends AbstractController
 {
     /**
      * Método para cambiar la ruta por defecto de symfony.
-     * Hará un logout de la sesión activa (si hay alguna) y redirigirá al login.
+     * Hará un logout de la sesión activa (si hay alguna) y redirigirá a la landing.
      */
     #[Route(path: '/', name: 'index')]
     public function index(): Response
     {
         return $this->redirectToRoute('app_logout');
+    }
+
+    #[Route(path: '/index', name: 'index_')]
+    public function landing(): Response {
+        return $this->render('page/landing/landing.html.twig');
     }
 
     /**

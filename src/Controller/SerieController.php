@@ -24,6 +24,11 @@ class SerieController extends AbstractController
     public function mostrarSerie(UsuarioRepository $usuarioRepository, SerieRepository $serieRepository, ListaRepository $listaRepository, SerieListaRepository $serieListaRepository, int $id): Response
     {
         $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
         $currentUserID = $currentUser->getId();
 
@@ -90,8 +95,17 @@ class SerieController extends AbstractController
      * Método que mostrará todas las series disponibles.
      */
     #[Route('/mostrarSeries', name: 'mostrar_series')]
-    public function mostrarSeries(SerieRepository $serieRepository): Response
+    public function mostrarSeries(SerieRepository $serieRepository, UsuarioRepository $usuarioRepository): Response
     {
+        $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
+        $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
+        $currentUserID = $currentUser->getId();
+
         $array_series = $serieRepository->findAll();
 
         if (!$array_series) {
@@ -113,6 +127,11 @@ class SerieController extends AbstractController
      */
     private function statsPerfil(UsuarioRepository $usuarioRepository, ListaRepository $listaRepository, SerieRepository $serieRepository, SerieListaRepository $serieListaRepository) {
         $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
         $currentUserID = $currentUser->getId();
 
@@ -163,6 +182,11 @@ class SerieController extends AbstractController
     public function perfil(UsuarioRepository $usuarioRepository, ListaRepository $listaRepository, SerieListaRepository $serieListaRepository, SerieRepository $serieRepository) {
         // Obtener el ID del usuario conectado:
         $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
         $currentUserID = $currentUser->getId();
 
@@ -212,6 +236,11 @@ class SerieController extends AbstractController
     public function perfilLista(UsuarioRepository $usuarioRepository, string $tipo_lista, ListaRepository $listaRepository, SerieRepository $serieRepository, SerieListaRepository $serieListaRepository): Response
     {
         $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
         $currentUserID = $currentUser->getId();
 
@@ -373,6 +402,11 @@ class SerieController extends AbstractController
     #[Route('/seguimiento', name: 'seguimiento')]
     public function seguimiento(UsuarioRepository $usuarioRepository, ListaRepository $listaRepository, SerieRepository $serieRepository, SerieListaRepository $serieListaRepository) {
         $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
         $currentUserID = $currentUser->getId();
 
@@ -416,7 +450,16 @@ class SerieController extends AbstractController
      * Método que muestra la página de lista de seguimiento, donde se encuentran todas las series de la lista series_por_ver
      */
     #[Route('/destacados', name: 'destacados')]
-    public function destacados(SerieRepository $serieRepository) {
+    public function destacados(SerieRepository $serieRepository, UsuarioRepository $usuarioRepository) {
+        $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
+        $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
+        $currentUserID = $currentUser->getId();
+
         $array_series = $serieRepository->findAll();  
 
         return $this->render('page/destacados/destacados.html.twig', [

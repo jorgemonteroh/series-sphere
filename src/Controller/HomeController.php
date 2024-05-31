@@ -27,6 +27,11 @@ class HomeController extends AbstractController
     {
         // Recoger Usuario actual:
         $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
         $currentUserID = $currentUser->getId();
 

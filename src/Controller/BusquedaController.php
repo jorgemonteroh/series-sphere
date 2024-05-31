@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Repository\GeneroRepository;
 use App\Repository\SerieRepository;
 use App\Repository\StreamingRepository;
+use App\Repository\UsuarioRepository;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,8 +13,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class BusquedaController extends AbstractController
 {
     #[Route('/busqueda', name: 'busqueda')]
-    public function index(GeneroRepository $generoRepository, StreamingRepository $streamingRepository): Response
+    public function index(GeneroRepository $generoRepository, StreamingRepository $streamingRepository, UsuarioRepository $usuarioRepository): Response
     {
+        $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
+        $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
+        $currentUserID = $currentUser->getId();
+
         $array_generos = $generoRepository->findAll();
         $array_streamings = $streamingRepository->findAll();
         $anio = date('Y');
@@ -30,7 +40,16 @@ class BusquedaController extends AbstractController
     }
 
     #[Route('busquedaSubmit', name: 'busqueda_submit')]
-    public function submit(GeneroRepository $generoRepository, StreamingRepository $streamingRepository, SerieRepository $serieRepository): Response {     
+    public function submit(GeneroRepository $generoRepository, StreamingRepository $streamingRepository, SerieRepository $serieRepository, UsuarioRepository $usuarioRepository): Response { 
+        $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
+        $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
+        $currentUserID = $currentUser->getId();
+    
         $array_generos = $generoRepository->findAll();
         $array_streamings = $streamingRepository->findAll();
         $anio = date('Y');
@@ -71,7 +90,16 @@ class BusquedaController extends AbstractController
     }
 
     #[Route('livesearch', name: 'livesearch')]
-    public function livesearch(SerieRepository $serieRepository, GeneroRepository $generoRepository, StreamingRepository $streamingRepository) {
+    public function livesearch(SerieRepository $serieRepository, GeneroRepository $generoRepository, StreamingRepository $streamingRepository, UsuarioRepository $usuarioRepository) {
+        $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
+        $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
+        $currentUserID = $currentUser->getId();
+
         $array_generos = $generoRepository->findAll();
         $array_streamings = $streamingRepository->findAll();
         $anio = date('Y');

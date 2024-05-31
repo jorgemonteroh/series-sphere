@@ -13,6 +13,16 @@
   --por-ver: #64ade9;
   --favorito: linear-gradient(rgb(250, 53, 53), #f058d1);
   --eliminar: #e22929;
+  --star:  linear-gradient(
+    to right,
+    #ffffff 0,
+    #cb9b51 22%,
+    #f6e27a 45%,
+    #f6f2c0 50%,
+    #f6e27a 55%,
+    #cb9b51 78%,
+    #ffffff 100%
+  );
 }
 
 /* General: */

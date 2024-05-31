@@ -26,6 +26,11 @@ class ListaController extends AbstractController
     {
         // Obtener usuario:
         $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
         $currentUserID = $currentUser->getId();
 
@@ -80,6 +85,11 @@ class ListaController extends AbstractController
     {
         // Obtener usuario:
         $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
         $currentUserID = $currentUser->getId();
 
@@ -127,6 +137,11 @@ class ListaController extends AbstractController
     {
         // Obtener usuario:
         $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
         $currentUserID = $currentUser->getId();
 
@@ -174,6 +189,11 @@ class ListaController extends AbstractController
     {
         // Obtener usuario:
         $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
         $currentUserID = $currentUser->getId();
 
@@ -227,6 +247,11 @@ class ListaController extends AbstractController
     {
         // Obtener usuario:
         $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
         $currentUserID = $currentUser->getId();
 
@@ -282,6 +307,11 @@ class ListaController extends AbstractController
     {
         // Obtener usuario:
         $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
         $currentUserID = $currentUser->getId();
 
@@ -329,6 +359,11 @@ class ListaController extends AbstractController
     {
         // Obtener usuario:
         $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
         $currentUserID = $currentUser->getId();
 
@@ -376,6 +411,11 @@ class ListaController extends AbstractController
     {
         // Obtener usuario:
         $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_logout');
+        }
+
         $currentUser = $usuarioRepository->getUserID($user->getUserIdentifier());
         $currentUserID = $currentUser->getId();
 
