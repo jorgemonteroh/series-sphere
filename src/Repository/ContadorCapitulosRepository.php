@@ -21,28 +21,16 @@ class ContadorCapitulosRepository extends ServiceEntityRepository
         parent::__construct($registry, ContadorCapitulos::class);
     }
 
-//    /**
-//     * @return ContadorCapitulos[] Returns an array of ContadorCapitulos objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function buscarSerieSeguimiento($serie_id): array
+   {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "
+            SELECT * FROM contador_capitulos 
+            WHERE serie_id = '$serie_id'
+            ";
 
-//    public function findOneBySomeField($value): ?ContadorCapitulos
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $resultSet = $conn->executeQuery($sql);
+
+        return $resultSet->fetchAllAssociative();
+   }
 }

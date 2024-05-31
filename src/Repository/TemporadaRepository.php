@@ -32,7 +32,6 @@ class TemporadaRepository extends ServiceEntityRepository
         $resultSet = $conn->executeQuery($sql);
 
         return $resultSet->fetchAllAssociative();
-
    }
 
 //    public function findOneBySomeField($value): ?Temporada
