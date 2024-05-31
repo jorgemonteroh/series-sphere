@@ -12,10 +12,14 @@ const btnLogin = document.getElementById("login");
 
 btnRegistro.addEventListener("click", () => {
   contenedor.classList.add("activo");
+  btnRegistro.classList.add("hidden");
+  btnLogin.classList.remove("hidden");
 });
 
 btnLogin.addEventListener("click", () => {
   contenedor.classList.remove("activo");
+  btnLogin.classList.add("hidden");
+  btnRegistro.classList.remove("hidden");
 });
 
 const btnLoginNav = document.getElementById("btn-login");
