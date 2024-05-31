@@ -10,11 +10,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" type="text/css" href="{{ asset('styles/styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('styles/home.css') }}">
+<style>
+#selectSeguimiento {
+padding:5px;
+text-align:center
+}
+</style>
 {% endblock %}
 
 {% block title %}Inicio{% endblock %}
 
 {% block body %}
+  {{form_datos}}
     <!-- NAVBAR: -->
     <nav class="navbar navbar-expand-lg d-flex">
       <div class="container-fluid">
@@ -98,7 +105,26 @@
           </a>
           {# <a href="{{ path('add_lista_viendo_s', {'id': serie.id}) }}"> #}
           <div class="info-capitulo">
-            <p>S1 ~~ Cap. 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="bi bi-plus-square"></i></p>
+          <form action="{{ path('submitHome') }}" method="post">
+            <select id="selectSeguimiento">
+              <!-- se obtiene un array con toda  la información de `Temporada` de una serie -->
+              {% for info_temporada in array_temporadas %}
+                <!-- foreach para obtener dicha información (numero_temp, capitulos, serie_id...) -->
+                {% for temporada in info_temporada %}
+                  <!-- se imprime la información dependiendo de cada serie con los ids de `Serie` y `Temporada` -->
+                  {% if serie.id == temporada.serie_id %}
+                      <option disabled>Temporada {{temporada.numero_temp}}</option>
+                    {% for i in 0..temporada.capitulos %}
+                      <option name="current_seguimiento">T{{temporada.numero_temp}} | Cap. {{i}}</option>
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label for="saveSeguimiento"><i class="bi bi-check2-square" style="cursor:pointer"></i></label>
+            <input id="saveSeguimiento" type="submit" name="form_seguimiento" hidden />
+          </form>
           </div>
           {# </a> #}  
         </div>

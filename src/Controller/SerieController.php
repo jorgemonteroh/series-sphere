@@ -2,16 +2,13 @@
 
 namespace App\Controller;
 
-use App\Repository\GeneroRepository;
 use App\Repository\ListaRepository;
 use App\Repository\SerieListaRepository;
 use App\Repository\SerieRepository;
-use App\Repository\StreamingRepository;
 use App\Repository\UsuarioRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\UnicodeString;
 
 class SerieController extends AbstractController
 {
@@ -105,57 +102,6 @@ class SerieController extends AbstractController
             'array_series' => $array_series
         ]);
     }
-
-    /**
-     * Método que mostrará todas las series de un género específico.
-     * Se usará en el apartado de búsqueda.
-     * genero: genero de la serie
-     */
-    #[Route('/buscarSerie/genre={genero}', name: 'buscar_serie_genero')]
-    public function buscarSeriePorGenero(GeneroRepository $generoRepository, string $genero): Response
-    {
-        $genero_buscar = new UnicodeString($genero);
-        $genero_lower = ($genero_buscar)->lower();
-        $genero = $generoRepository->buscarGenero($genero_lower);
-        $genero_string = $genero->getNombre();
-        
-        if (!$genero) {
-            return $this->render('security/errors/404-error.html.twig');
-        }
-
-        $array_series = $genero->getSerie();
-
-        return $this->render('serie/views/showAllSeriesGenero.html.twig', [
-            'array_series' => $array_series,
-            'genero' => $genero_string
-        ]);
-    }
-
-    /**
-     * Método que mostrará todas las series de una plataforma de streaming específica.
-     * Se usará en el apartado de búsqueda.
-     * streaming: plataforma de streaming de la serie
-     */
-    #[Route('/buscarSerie/stream={streaming}', name: 'buscar_serie_streaming')]
-    public function buscarSeriePorStreaming(StreamingRepository $streamingRepository, string $streaming): Response
-    {
-        $streaming_buscar = new UnicodeString($streaming);
-        $streaming_lower = ($streaming_buscar)->lower();
-        $streaming = $streamingRepository->buscarStreaming($streaming_lower);
-        $streaming_string = $streaming->getNombre();
-        
-        if (!$streaming) {
-            return $this->render('security/errors/404-error.html.twig');
-        }
-
-        $array_series = $streaming->getSerie();
-
-        return $this->render('serie/views/showAllSeriesStreaming.html.twig', [
-            'array_series' => $array_series,
-            'streaming' => $streaming_string
-        ]);
-    }
-
 
 
     /** ###################################### 

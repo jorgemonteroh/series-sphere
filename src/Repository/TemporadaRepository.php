@@ -21,20 +21,19 @@ class TemporadaRepository extends ServiceEntityRepository
         parent::__construct($registry, Temporada::class);
     }
 
-//    /**
-//     * @return Temporada[] Returns an array of Temporada objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   public function buscarTemporadas($serie_id): array
+   {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "
+            SELECT * FROM temporada 
+            WHERE serie_id = '$serie_id'
+            ";
+
+        $resultSet = $conn->executeQuery($sql);
+
+        return $resultSet->fetchAllAssociative();
+
+   }
 
 //    public function findOneBySomeField($value): ?Temporada
 //    {

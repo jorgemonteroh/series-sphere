@@ -32,9 +32,13 @@ class Temporada
     #[ORM\OneToMany(mappedBy: 'temporada', targetEntity: ContadorCapitulos::class)]
     private Collection $contadorCapitulos;
 
+    #[ORM\OneToMany(mappedBy: 'id_temporada', targetEntity: Capitulo::class)]
+    private Collection $capitulos_entity;
+
     public function __construct()
     {
         $this->contadorCapitulos = new ArrayCollection();
+        $this->capitulos_entity = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -124,6 +128,36 @@ class Temporada
             // set the owning side to null (unless already changed)
             if ($contadorCapitulo->getTemporada() === $this) {
                 $contadorCapitulo->setTemporada(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Capitulo>
+     */
+    public function getCapitulosEntity(): Collection
+    {
+        return $this->capitulos_entity;
+    }
+
+    public function addCapitulosEntity(Capitulo $capitulosEntity): static
+    {
+        if (!$this->capitulos_entity->contains($capitulosEntity)) {
+            $this->capitulos_entity->add($capitulosEntity);
+            $capitulosEntity->setIdTemporada($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCapitulosEntity(Capitulo $capitulosEntity): static
+    {
+        if ($this->capitulos_entity->removeElement($capitulosEntity)) {
+            // set the owning side to null (unless already changed)
+            if ($capitulosEntity->getIdTemporada() === $this) {
+                $capitulosEntity->setIdTemporada(null);
             }
         }
 
