@@ -138,4 +138,15 @@ class HomeController extends AbstractController
             'seriesSelectedValores' => $seriesSelectedValores
         ]);
     }
+
+    #[Route('/declaracionAccesibilidad', name: 'declaracion_accesibilidad')]
+    public function accesibilidad(): Response {
+        return $this->render('page/footer/accesibilidad.html.twig');
+    }
+
+    #[Route('/mapaWeb', name: 'mapa_web')]
+    public function mapaWeb(): Response {
+        return $this->render('page/footer/mapaWeb.html.twig');
+    }
+
 }
