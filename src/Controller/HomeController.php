@@ -81,10 +81,10 @@ class HomeController extends AbstractController
         $seriesSelectedValores = [];
         if(isset($_POST['current_seguimiento']) && isset($_POST['serie_seguimiento'])) {
             $serie = $serieRepository->find($_POST['serie_seguimiento']);
-            $serieActualizar = $contadorCapitulosRepository->buscarSerieSeguimiento($serie->getId());
+            $serieActualizar = $contadorCapitulosRepository->buscarDatosSeguimiento($serie->getId(), $currentUserID);
             $seriesSelectedValores[$serie->getId()] = $_POST['current_seguimiento'];
             // Si la serie ya existe se actualiza:
-            if (count($serieActualizar) == 1) {
+            if (!empty($serieActualizar)) {
                 $contadorCapitulos = $entityManager->getRepository(ContadorCapitulos::class)->find($serieActualizar[0]['id']);
                 $patron = '/T(\d+)C(\d+)/';
         
@@ -128,7 +128,7 @@ class HomeController extends AbstractController
 
         foreach ($array_series_viendo as $serie) {
             $serieId = $serie->getId();
-            $contadorCapitulos = $contadorCapitulosRepository->buscarSerieSeguimiento($serieId);
+            $contadorCapitulos = $contadorCapitulosRepository->buscarDatosSeguimiento($serieId, $currentUserID);
             if(!empty($contadorCapitulos)) {
                 $temporadaId = $contadorCapitulos[0]['temporada_id'];
                 $capituloActual = $contadorCapitulos[0]['capitulo_actual'];

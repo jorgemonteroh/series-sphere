@@ -21,12 +21,13 @@ class ContadorCapitulosRepository extends ServiceEntityRepository
         parent::__construct($registry, ContadorCapitulos::class);
     }
 
-    public function buscarSerieSeguimiento($serie_id): array
+    public function buscarDatosSeguimiento($serie_id, $usuario_id): array
    {
         $conn = $this->getEntityManager()->getConnection();
         $sql = "
             SELECT * FROM contador_capitulos 
             WHERE serie_id = '$serie_id'
+            AND usuario_id = '$usuario_id'
             ";
 
         $resultSet = $conn->executeQuery($sql);
