@@ -20,7 +20,6 @@
         "symfony/framework-bundle": "7.0.*",
         "symfony/http-foundation": "7.0.*",
         "symfony/monolog-bundle": "^3.10",
-        "symfony/requirements-checker": "^2.0",
         "symfony/routing": "7.0.*",
         "symfony/runtime": "7.0.*",
         "symfony/security-bundle": "7.0.*",
@@ -67,8 +66,7 @@
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "importmap:install": "symfony-cmd",
-            "requirements-checker": "script"
+            "importmap:install": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
