@@ -5,7 +5,6 @@ use App\Repository\GeneroRepository;
 use App\Repository\SerieRepository;
 use App\Repository\StreamingRepository;
 use App\Repository\UsuarioRepository;
-use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
