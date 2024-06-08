@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Capitulo;
 use App\Entity\Director;
 use App\Entity\Genero;
 use App\Entity\Serie;

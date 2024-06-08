@@ -84,6 +84,7 @@ class SerieController extends AbstractController
             'genero_serie' => $serie->getGenero(),
             'director_serie' => $serie->getDirector(),
             'sinopsis_serie' => $serie->getSinopsis(),
+            'valoracion_serie' => $serie->getValoracion(),
             'array_temporadas' => $array_temporadas,
             'icono_vista' => $icono_vista,
             'icono_por_ver' => $icono_por_ver,

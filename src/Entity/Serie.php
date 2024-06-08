@@ -49,6 +49,9 @@ class Serie
     #[ORM\OneToMany(mappedBy: 'serie', targetEntity: ContadorCapitulos::class)]
     private Collection $contadorCapitulos;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $valoracion = null;
+
     public function __construct()
     {
         $this->temporada = new ArrayCollection();
@@ -141,6 +144,19 @@ class Serie
 
         return $this;
     }
+
+    public function getPosterCrud(): ?string
+    {
+        return $this->poster_src;
+    }
+
+    public function setPosterCrud(?string $poster_src): static
+    {
+        $this->poster_src = $poster_src;
+
+        return $this;
+    }
+
 
     /**
      * @return Collection<int, Genero>
@@ -296,6 +312,18 @@ class Serie
                 $contadorCapitulo->setSerie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getValoracion(): ?float
+    {
+        return $this->valoracion;
+    }
+
+    public function setValoracion(?float $valoracion): static
+    {
+        $this->valoracion = $valoracion;
 
         return $this;
     }

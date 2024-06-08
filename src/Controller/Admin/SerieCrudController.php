@@ -34,7 +34,7 @@ class SerieCrudController extends AbstractCrudController
             TextField::new('nombre'),
             NumberField::new('fecha_lanzamiento'),
             TextareaField::new('sinopsis'),
-            TextField::new('poster_src')->setHelp("img/posters/SERIE_POSTER.jpg")->setLabel("Póster de Serie"),
+            TextField::new('posterCrud')->setHelp("img/posters/SERIE_POSTER.jpg")->setLabel("Póster de Serie"),
             AssociationField::new('genero')->setFormTypeOptions(['multiple' => true])->setFormTypeOption('by_reference', false)->onlyOnForms(),
             ArrayField::new('genero')->hideOnForm(),
             AssociationField::new('streamings')->setFormTypeOptions(['multiple' => true])->setFormTypeOption('by_reference', false)->onlyOnForms(),
