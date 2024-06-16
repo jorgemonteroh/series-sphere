@@ -21,7 +21,7 @@ class SecurityController extends AbstractController
 
     #[Route(path: '/index', name: 'index_')]
     public function landing(): Response {
-        return $this->render('page/landing/landing.html.twig');
+        return $this->render('page/invitado/index.html.twig');
     }
 
     /**

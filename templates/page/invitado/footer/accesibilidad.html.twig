@@ -1,0 +1,215 @@
+{# templates/pages/footer/accesibilidad.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/home.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/landing.css') }}">
+    <style>
+        .contenedor-accesibilidad {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 4vh;
+        }
+        .li-accesibilidad {
+            list-style-type: lower-alpha;
+        }
+        .ul-accesibilidad {
+            list-style-type: square;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}Accesibilidad Web{% endblock %}
+
+{% block body %}
+   <!-- NAVBAR: -->
+   <nav class="navbar navbar-expand-lg d-flex">
+      <div class="container-fluid">
+        <!-- ICONO: -->
+        <a class="navbar-brand" href="{{ path('index_') }}">
+          <img src="{{ asset('img/icons/SerieSphere.gif') }}" alt="Serie Sphere" title="SerieSphere" class="logo-pagina">
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          id="button-collapse"
+          onclick="hidePfp();"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('index_') }}">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('destacados_invitado') }}">Destacados</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('busqueda_invitado') }}">Buscar</a>
+            </li>
+          </ul>
+        </div>
+        <a href="{{ path('app_login') }}" class="btn btn-login" id="btn-login">
+          Identificarse
+        </a>
+      </div>
+    </nav>
+
+    <!-- SECCIÓN INICIO: -->
+    <section class="contenedor-pagina">
+        <div class="titulo-pagina">Declaración de Accesibilidad</div>
+
+        <div class="contenedor-accesibilidad">
+        <p>
+            Esta página se ha comprometido a hacer accesibles sus sitios web de conformidad con el 
+            <a href="https://www.boe.es/eli/es/rd/2018/09/07/1112/con" target="_blank">Real Decreto 1112/2018, de 7 de septiembre (Abre nueva ventana)</a>, 
+            sobre accesibilidad de los sitios web y aplicaciones para dispositivos móviles del sector público (en adelante, Real Decreto 1112/2018, de 7 de septiembre).
+            La presente declaración de accesibilidad se aplica al sitio web y subdominios. 
+        </p>
+        <b>Situación de cumplimiento</b>
+        <p>Este sitio web es parcialmente conforme con el Real Decreto 1112/2018, de 7 de septiembre, 
+            debido a la falta de conformidad de los aspectos que se indican a continuación.</p>
+        <b>Contenido no accesible:</b>
+        <ol type="a" class="li-accesibilidad">
+            <li>Uso inapropiado de elementos de encabezado (9.1.3.1 Información y relaciones)</li>
+            <li>En algún caso no se proporciona el suficiente contraste entre el primer plano y el fondo (9.1.4.3, 9.1.4.11)</li>
+            <li>En el caso de la Landing Page, el carrusel no permite al usuario ocultar el contenido (criterio 9.2.2.2).</li>
+            <li>En formulario de búsqueda los usuarios no siempre reciben sugerencias adecuadas para corregir errores al introducir datos, incumpliendo el criterio 9.3.3.3.</li>
+            <li>En algunas páginas hay errores de código no bien formado (9.4.1.1) y elementos de la interfaz de usuario sean reconocibles por las herramientas de apoyo (9.4.1.2)</li>
+            <li>Podrían existir fallos puntuales de edición en alguna página web</li>
+            <li>En el Footer podría existir una ligera falta de contraste entre el fondo y los elementos (9.1.4.3, 9.1.4.11)</li>
+        </ol>
+        <b>Preparación de la presente declaración de accesibilidad</b>
+        <p>La presente declaración fue preparada el 5 de marzo de 2024.<br>
+            El método empleado para preparar la declaración ha sido una autoevaluación llevada a cabo por el propio organismo.<br>
+            Última revisión de la declaración: 5 de marzo de 2024.</p>
+        <b>Observaciones y datos de contacto</b>
+        <p>Puede realizar comunicaciones sobre requisitos de accesibilidad (artículo 10.2.a) del Real Decreto 1112/2018, de 7 de septiembre) como, por ejemplo:</p>
+        <ul class="ul-accesibilidad">
+            <li>Informar sobre cualquier posible incumplimiento por parte de este sitio web.</li>
+            <li>Transmitir otras dificultades de acceso al contenido.</li>
+            <li>Formular cualquier otra consulta o sugerencia de mejora relativa a la accesibilidad del sitio web.</li>
+        </ul>
+        <p>A través de las siguientes vías:</p>
+        <ul class="ul-accesibilidad">
+            <li>Correo Electrónico: <a href="#">jorge.montero5@educa.madrid.org</a></li>
+        </ul>
+        <b>Procedimiento de aplicación</b>
+        <p>A través de este procedimiento podrá iniciar una reclamación para conocer y oponerse a los motivos de la desestimación de una solicitud de información accesible o queja, instar la adopción de las medidas oportunas en el caso de no estar de acuerdo con la decisión adoptada, o exponer las razones por las que se considera que la respuesta no cumple con los requisitos exigidos.</p>
+        <p><a href="https://sedeminhap.gob.es/es-ES/Organos/SecretariaGeneralTecnica/Procedimientos/Paginas/Default.aspx?IdProcedimiento=1771&p=2" target="_blank">Enlace al procedimiento de reclamación (Abre nueva ventana)</a>, que debe dirigir a la Subdirección General de Servicios Web, Transparencia y Protección de Datos, como Unidad responsable de accesibilidad de este Ministerio, o si la reclamación es por una actuación de dicha Unidad, al superior jerárquico de ésta.</p>
+        <b>Contenido opcional</b>
+        <p>La versión actualmente visible de este sitio web es de marzo de 2024 y en esa fecha se hizo la revisión del nivel de accesibilidad vigente en aquel momento.</p>
+        <p>Este sitio adopta las siguientes medidas para facilitar la accesibilidad: </p>
+        <ul class="ul-accesibilidad">
+            <li>Utilización de texto alternativo en las imágenes</li>
+            <li>Los enlaces ofrecen detalles de la función o destino del hipervínculo</li>
+            <li>Uso de los estándares del W3C: XHTML 1.0, CSS 3.0, WAI AA.</li>
+        </ul>
+    </div>
+    </section>
+    
+    <!-- Pie de pagina (footer) -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-nav">
+          <ul>
+            <li class="footer-decor">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="5"
+                viewBox="0 0 80 6"
+                fill="none"
+              >
+                <path
+                  d="M0 3H80"
+                  stroke="url(#paint0_linear_44_98)"
+                  stroke-opacity="0.8"
+                  stroke-width="500"
+                />
+                <defs>
+                  <linearGradient
+                    id="paint0_linear_44_98"
+                    x1="41.0833"
+                    y1="3.00193"
+                    x2="37.9583"
+                    y2="3.00193"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop offset="0.168213" stop-color="#71DF7C" />
+                    <stop offset="0.858244" stop-color="white" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </li>
+            <li><a href="">Sobre Nosotros</a></li>
+            <li><a href="">Ayuda</a></li>
+            <li><a href="">API</a></li>
+            <li><a href="">Términos</a></li>
+            <li><a href="">Contacto</a></li>
+            <li><a href="{{ path('declaracion_accesibilidad_invitado') }}"><i class="bi bi-universal-access-circle"></i></i></a></li>
+            <li><a href="{{ path('mapa_web_invitado') }}"><i class="bi bi-globe"></i></a></li>
+            <li><a>━━</a></li>
+            <li>
+              <a href=""><i class="social bi bi-twitter-x"></i></a>
+            </li>
+            <li>
+              <a href=""><i class="social bi bi-instagram"></i></a>
+            </li>
+            <li>
+              <a href=""><i class="social bi bi-youtube"></i></a>
+            </li>
+            <li class="footer-decor">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="5"
+                viewBox="0 0 80 6"
+                fill="none"
+              >
+                <path
+                  d="M0 3H80"
+                  stroke="url(#paint0_linear_44_98)"
+                  stroke-opacity="0.8"
+                  stroke-width="500"
+                />
+                <defs>
+                  <linearGradient
+                    id="paint0_linear_44_98"
+                    x1="41.0833"
+                    y1="3.00193"
+                    x2="37.9583"
+                    y2="3.00193"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop offset="0.168213" stop-color="#71DF7C" />
+                    <stop offset="0.858244" stop-color="white" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="{{ asset('app.js') }}"></script>
+{% endblock %}
