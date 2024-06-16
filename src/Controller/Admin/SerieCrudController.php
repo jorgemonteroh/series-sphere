@@ -41,6 +41,7 @@ class SerieCrudController extends AbstractCrudController
             ArrayField::new('streamings')->hideOnForm(),
             AssociationField::new('director')->setFormTypeOptions(['multiple' => true])->setFormTypeOption('by_reference', false)->onlyOnForms(),
             ArrayField::new('director')->hideOnForm(),
+            NumberField::new('valoracion'),
             DateField::new('fecha_creacion')->hideOnForm()
         ];
     }
