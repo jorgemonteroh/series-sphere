@@ -15,5 +15,17 @@ services:
       timeout: 5s
       retries: 5
 
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: seriesSphere-pma
+    environment:
+      PMA_HOST: database
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - database
+
 volumes:
   mariadb_data:
