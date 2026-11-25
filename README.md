@@ -109,8 +109,8 @@ usuario          → contador_capitulos (seguimiento por serie)
 ### 1. Clona el repositorio
 
 ```bash
-git clone https://github.com/jorgemonteroh/TFG_23-24.git
-cd series-tracker
+git clone https://github.com/jorgemonteroh/series-sphere.git
+cd series-sphere
 ```
 
 ### 2. Instala las dependencias
